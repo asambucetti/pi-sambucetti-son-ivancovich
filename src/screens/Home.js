@@ -4,6 +4,7 @@ import DynamicForm from '../components/DynamicForm';
 import { FlatList } from 'react-native-web';
 import { db } from '../firebase/config';
 
+// este falta chequear bien que pide y hacerlo
 function Home(props) {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
