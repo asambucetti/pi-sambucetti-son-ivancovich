@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
-import DynamicForm from '../components/DynamicForm';
 import { FlatList } from 'react-native-web';
 import { db } from '../firebase/config';
 
@@ -27,14 +26,13 @@ function Home(props) {
 
 
     function onSubmit(props) {
-        props.navigation.navigate('Comentarios'); // futura screen donde usu podra agregar comentarios
+        props.navigation.navigate('ComentarPosteo'); // futura screen donde usu podra agregar comentarios
     }
 
 
     return (
         <View>
             <Text>NOMBRE DE LA APP</Text>
-            <DynamicForm />
             <FlatList
                 data={posts} // esto esta llamando a la const de arriba y esta linkeado a la screen de posts asi muestra todos y es scrolleable
                 keyExtractor={item => item.id.toString()}
