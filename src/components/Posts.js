@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import firebase from 'firebase';
-import { db, auth } from '../../firebase/config';
+import { db, auth } from '../firebase/config';
 import { View, Text, Pressable} from 'react-native';
 
 

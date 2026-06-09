@@ -4,14 +4,15 @@ import { auth } from '../firebase/config'; // auth dejará disponibles métodos 
 
 
 function Login(props) {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [loginError, setLoginError] = useState('');
 
     // ACA chequeo que usuario este bien logueado y redirecciono a pantalla ppal de la app
     useEffect(() => { //useEffect reemplaza a componentDidMOunt (porque solo quiero preguntar 1 vez si el usuario esta logueado o no)
         auth.onAuthStateChanged(user => { // onAuthStateChanged observa los datos obtenidos del usuario
-            if(user){
-                props.navigation.navigate('HomeMenu');
+            if (user) {
+                props.navigation.navigate('NavegacionTab');
             }
         });
     }, [])
@@ -19,19 +20,19 @@ function Login(props) {
     function onSubmit() {
         // ACA chequeo errores de campo
         if (!email.includes('@')) {
-            alert('Email mal formateado');
+            setLoginError('Email mal formateado');
             return;
         }
         if (password.length < 6) {
-            alert('La password debe tener una longitud mínima de 6 caracteres');
+            setLoginError('La password debe tener una longitud mínima de 6 caracteres');
             return;
         }
         auth.signInWithEmailAndPassword(email, password)
             .then(response => {
-                props.navigation.navigate('HomeMenu');
+                props.navigation.navigate('NavegacionTab', { screen: 'NavegacionStackHome' });
             })
             .catch(error => {
-                alert('Credenciales incorrectas');
+                setLoginError(error.message)
             });
     };
 
@@ -50,8 +51,8 @@ function Login(props) {
                 keyboardType='default'
                 placeholder='password'
                 secureTextEntry={true}  // muestra al usuario los puntitos
-                onChangeText={text => setPassword(text)} 
-                value={password} 
+                onChangeText={text => setPassword(text)}
+                value={password}
             />
 
             <Pressable // para simular boton de envio
@@ -60,6 +61,8 @@ function Login(props) {
             >
                 <Text style={styles.textoBoton}>Login</Text>
             </Pressable>
+
+            {loginError !== '' ? <Text>{loginError}</Text> : null}
 
             <Pressable
                 onPress={() => props.navigation.navigate('Register')} // chequear que register lo llamen asi

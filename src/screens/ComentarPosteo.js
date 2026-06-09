@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
-import { FlatList, TextInput } from 'react-native-web';
+import { TextInput, FlatList } from 'react-native-web';
 import { db, auth } from '../firebase/config';
-
 
 function ComentarPosteo(props) {
 
@@ -11,7 +10,7 @@ function ComentarPosteo(props) {
     const [comment, setComment] = useState('');
 
 
-    console.log(props);
+    console.log(props); //sacar esto dsp
     
 
     useEffect(() => {
