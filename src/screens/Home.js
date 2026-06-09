@@ -26,14 +26,14 @@ function Home(props) {
 
 
     return (
-        <View>
+        <View style={styles.container}>
+            <Text style={styles.logo}>Pawly</Text>
             {(loading) ?
                 (<View style={styles.container} >
                     <Text>Cargando...</Text>
                 </View>)
                 :
                 (<View style={styles.container}>
-                    <Text>Pawly</Text>
                     <FlatList
                         data={posts} // esto esta llamando a la const de arriba y esta linkeado a la screen de posts asi muestra todos y es scrolleable
                         keyExtractor={item => item.id.toString()}
@@ -54,10 +54,19 @@ function Home(props) {
 
 const styles = StyleSheet.create({
     container: {
-        paddingHorizontal: 10,
-        marginTop: 20
+        flex: 1,
+        backgroundColor: '#FFF7EF',
+        paddingHorizontal: 15,
+        paddingTop: 20
+    },
+    logo: {
+        fontSize: 34,
+        fontWeight: 'bold',
+        color: '#F28C28',
+        textAlign: 'center',
+        marginBottom: 5
     }
-})
+});
 
 export default Home;
 

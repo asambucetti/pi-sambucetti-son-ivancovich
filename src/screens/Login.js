@@ -39,16 +39,19 @@ function Login(props) {
 
     return (
         <View style={styles.container}>
+            <Text style={styles.logo}>Pawly</Text>
             <Text style={styles.titulo}>Formulario de login</Text>
 
-            <TextInput style={styles.input}
+            <TextInput 
+                style={styles.input}
                 keyboardType='email-address'
                 placeholder='email'
                 onChangeText={text => setEmail(text)} // usamos este atributo para guardar en el estado del componente principal los datos ingresados por el usuario
                 value={email} // obtiene la información del estado y la muestra al usuario en la pantalla
             />
 
-            <TextInput style={styles.input}
+            <TextInput 
+                style={styles.input}
                 keyboardType='default'
                 placeholder='password'
                 secureTextEntry={true}  // muestra al usuario los puntitos
@@ -67,7 +70,7 @@ function Login(props) {
 
             <Pressable
                 onPress={() => props.navigation.navigate('Register')} // chequear que register lo llamen asi
-                style={styles.boton}
+                style={styles.linkContainer}
             >
                 <Text style={styles.textoBoton}>Ir al registro</Text>
             </Pressable>
@@ -79,40 +82,61 @@ function Login(props) {
 
 const styles = StyleSheet.create({
     container: {
-        paddingHorizontal: 10,
-        marginTop: 20
+        flex: 1,
+        backgroundColor: '#FFF7EF',
+        paddingHorizontal: 25,
+        justifyContent: 'center'
     },
-    input: {
-        height: 20,
-        paddingVertical: 15,
-        paddingHorizontal: 10,
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderStyle: 'solid',
-        borderRadius: 6,
-        marginVertical: 10
+    logo: {
+        fontSize: 42,
+        fontWeight: 'bold',
+        color: '#F28C28',
+        textAlign: 'center',
+        marginBottom: 10
     },
     titulo: {
+        fontSize: 24,
         fontWeight: 'bold',
-        fontSize: 30
+        color: '#333',
+        textAlign: 'center',
+        marginBottom: 25
+    },
+    input: {
+        backgroundColor: '#fff',
+        paddingVertical: 12,
+        paddingHorizontal: 15,
+        borderWidth: 1,
+        borderColor: '#E0D6CC',
+        borderRadius: 10,
+        marginBottom: 12,
+        fontSize: 15
     },
     boton: {
-        backgroundColor: '#84b6f4',
-        paddingHorizontal: 10,
-        paddingVertical: 6,
+        backgroundColor: '#F28C28',
+        paddingVertical: 13,
         alignItems: 'center',
-        borderRadius: 4,
-        borderWidth: 1,
-        borderStyle: 'solid',
-        borderColor: '#84b6f4'
+        borderRadius: 10,
+        marginTop: 8
     },
     textoBoton: {
-        color: '#fff'
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 16
     },
     error: {
-        color: 'red'
+        color: 'red',
+        textAlign: 'center',
+        marginTop: 12
+    },
+    linkContainer: {
+        marginTop: 20
+    },
+    link: {
+        color: '#2F80ED',
+        textAlign: 'center',
+        fontWeight: 'bold'
     }
-})
+});
 
 
 export default Login;

@@ -56,16 +56,16 @@ function ComentarPosteo(props) {
 
 
     return (
-        <View>
-            <Text>Pawly</Text>
+        <View style={styles.container}>
+            <Text style={styles.logo}>Pawly</Text>
             <FlatList
                 data={posts} // esto esta llamando a la const de arriba y esta linkeado a la screen de posts asi muestra todos y es scrolleable
                 keyExtractor={item => item.id.toString()}
                 renderItem={({ item }) =>// todo lo que vaya despues del data va a depender como lo defina mi compañera en crearPosts/posts
                     <View>
-                        <Text>{item.data.email}</Text>
-                        <Text>{item.data.description}</Text>
-                        <Text>Likes: {item.data.likes.length}</Text>
+                        <Text style={styles.email}>{item.data.email}</Text>
+                        <Text style={styles.descripcion}>{item.data.description}</Text>
+                        <Text style={styles.likes}>Likes: {item.data.likes.length}</Text>
 
                         <TextInput
                             style={styles.input}
@@ -76,18 +76,18 @@ function ComentarPosteo(props) {
                         />
 
                         <Pressable onPress={() => onSubmit()}>
-                            <Text>Comment</Text>
+                            <Text style={StyleSheet.textoBoton}>Comment</Text>
                         </Pressable>
 
-                        <Text>Comentarios:</Text>
+                        <Text style={styles.subtitulo}>Comentarios:</Text>
 
                         <FlatList
                             data={comments}
                             keyExtractor={item => item.id.toString()}
                             renderItem={({ item }) =>
-                                <View style={styles.comment}>
-                                    <Text>{item.data.owner}</Text>
-                                    <Text>{item.data.commentPost}</Text>
+                                <View style={styles.commentCard}>
+                                    <Text style={styles.commentOwner}>{item.data.owner}</Text>
+                                    <Text style={styles.commentText}>{item.data.commentPost}</Text>
                                 </View>
                             }
                         />
@@ -98,20 +98,91 @@ function ComentarPosteo(props) {
     )
 };
 
+
 const styles = StyleSheet.create({
     container: {
-        paddingHorizontal: 10,
-        marginTop: 20
+        flex: 1,
+        backgroundColor: '#FFF7EF',
+        paddingHorizontal: 15,
+        paddingTop: 20
+    },
+    logo: {
+        fontSize: 34,
+        fontWeight: 'bold',
+        color: '#F28C28',
+        textAlign: 'center',
+        marginBottom: 5
+    },
+    titulo: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#333',
+        marginBottom: 15
+    },
+    card: {
+        backgroundColor: '#fff',
+        padding: 15,
+        borderRadius: 14,
+        borderWidth: 1,
+        borderColor: '#E8DED5',
+        marginBottom: 15
+    },
+    email: {
+        fontWeight: 'bold',
+        color: '#333',
+        fontSize: 15,
+        marginBottom: 8
+    },
+    descripcion: {
+        color: '#444',
+        fontSize: 16,
+        marginBottom: 12
+    },
+    likes: {
+        color: '#777',
+        marginBottom: 15
     },
     input: {
+        backgroundColor: '#fff',
         borderWidth: 1,
-        borderColor: '#ccc',
-        padding: 8,
-        marginVertical: 10
+        borderColor: '#E0D6CC',
+        borderRadius: 10,
+        padding: 12,
+        marginBottom: 12
     },
-    comment: {
-        padding: 8,
+    boton: {
+        backgroundColor: '#2F80ED',
+        paddingVertical: 12,
+        alignItems: 'center',
+        borderRadius: 10,
+        marginBottom: 20
+    },
+    textoBoton: {
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 15,
+    },
+    subtitulo: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#333',
+        marginBottom: 10
+    },
+    commentCard: {
+        backgroundColor: '#FFF7EF',
+        padding: 10,
+        borderRadius: 10,
+        marginBottom: 10,
+        borderWidth: 1,
+        borderColor: '#E8DED5'
+    },
+    commentOwner: {
+        fontWeight: 'bold',
+        color: '#333',
+        marginBottom: 4
+    },
+    commentText: {
+        color: '#444'
     }
 });
-
 export default ComentarPosteo;
