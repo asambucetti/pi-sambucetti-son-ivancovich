@@ -26,21 +26,29 @@ function Home(props) {
 
 
     return (
-        <View style={styles.container}>
-            <Text>Pawly</Text>
-            <FlatList
-                data={posts} // esto esta llamando a la const de arriba y esta linkeado a la screen de posts asi muestra todos y es scrolleable
-                keyExtractor={item => item.id.toString()}
-                renderItem={({ item }) =>
-                    <Posts
-                        id={item.id} 
-                        data={item.data} 
-                        navigation={props.navigation} //le paso la prop a post.js porque al ser un componente no la tiene, asi dsp me puede redirigir a la screen ComentarPosteo
+        <View>
+            {(loading) ?
+                (<View style={styles.container} >
+                    <Text>Cargando...</Text>
+                </View>)
+                :
+                (<View style={styles.container}>
+                    <Text>Pawly</Text>
+                    <FlatList
+                        data={posts} // esto esta llamando a la const de arriba y esta linkeado a la screen de posts asi muestra todos y es scrolleable
+                        keyExtractor={item => item.id.toString()}
+                        renderItem={({ item }) =>
+                            <Posts
+                                id={item.id}
+                                data={item.data}
+                                navigation={props.navigation} //le paso la prop a post.js porque al ser un componente no la tiene, asi dsp me puede redirigir a la screen ComentarPosteo
+                            />
+
+                        } // en este atributo(renderItem) renderizamos cada cosa que me pide la consigna, los datos los saco de la const posts donde, entrando a data, entro al objeto literal con todos sus atributos (email, nombre, descripcion)
                     />
-                    
-              } // en este atributo(renderItem) renderizamos cada cosa que me pide la consigna, los datos los saco de la const posts donde, entrando a data, entro al objeto literal con todos sus atributos (email, nombre, descripcion)
-            />
-        </View >
+                </View >)}
+        </View>
+
     )
 }
 
