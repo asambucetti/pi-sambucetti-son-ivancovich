@@ -24,7 +24,7 @@ function Login(props) {
             return;
         }
         if (password.length < 6) {
-            setLoginError('La password debe tener una longitud mínima de 6 caracteres');
+            setLoginError('La contraseña debe tener una longitud mínima de 6 caracteres');
             return;
         }
         auth.signInWithEmailAndPassword(email, password)
@@ -32,7 +32,8 @@ function Login(props) {
                 props.navigation.navigate('NavegacionTab', { screen: 'NavegacionStackHome' });
             })
             .catch(error => {
-                setLoginError(error.message)
+                setLoginError('Email o contraseña incorrectos')
+                console.log(error)
             });
     };
 
@@ -62,13 +63,13 @@ function Login(props) {
                 <Text style={styles.textoBoton}>Login</Text>
             </Pressable>
 
-            {loginError !== '' ? <Text>{loginError}</Text> : null}
+            {loginError !== '' ? <Text style={styles.error}>{loginError}</Text> : null}
 
             <Pressable
                 onPress={() => props.navigation.navigate('Register')} // chequear que register lo llamen asi
                 style={styles.boton}
             >
-                <Text>Ir al registro</Text>
+                <Text style={styles.textoBoton}>Ir al registro</Text>
             </Pressable>
 
         </View>
@@ -96,17 +97,20 @@ const styles = StyleSheet.create({
         fontSize: 30
     },
     boton: {
-        backgroundColor: '#28a745',
+        backgroundColor: '#84b6f4',
         paddingHorizontal: 10,
         paddingVertical: 6,
         alignItems: 'center',
         borderRadius: 4,
         borderWidth: 1,
         borderStyle: 'solid',
-        borderColor: '#28a745'
+        borderColor: '#84b6f4'
     },
     textoBoton: {
         color: '#fff'
+    },
+    error: {
+        color: 'red'
     }
 })
 

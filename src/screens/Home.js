@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { View, Text, Pressable, StyleSheet } from 'react-native';
-import { FlatList } from 'react-native-web';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { db } from '../firebase/config';
+import Posts from '../components/Posts';
 
 function Home(props) {
     const [posts, setPosts] = useState([]);
@@ -26,21 +26,19 @@ function Home(props) {
 
 
     return (
-        <View>
+        <View style={styles.container}>
             <Text>Pawly</Text>
             <FlatList
                 data={posts} // esto esta llamando a la const de arriba y esta linkeado a la screen de posts asi muestra todos y es scrolleable
                 keyExtractor={item => item.id.toString()}
-                renderItem={({ item }) =>// todo lo que vaya despues del data va a depender como lo defina mi compañera en crearPosts/posts
-                    <View>
-                        <Text>{item.data.email}</Text>
-                        <Text>{item.data.descripcion}</Text>
-                        <Text>{item.data.likes.length}</Text>
-
-                        <Pressable onPress={() => props.navigation.navigate('ComentarPosteo', { id: item.id })}>
-                            <Text>Comment</Text>
-                        </Pressable>
-                    </View>} // en este atributo(renderItem) renderizamos cada cosa que me pide la consigna, los datos los saco de la const posts donde, entrando a data, entro al objeto literal con todos sus atributos (email, nombre, descripcion)
+                renderItem={({ item }) =>
+                    <Posts
+                        id={item.id} 
+                        data={item.data} 
+                        navigation={props.navigation} //le paso la prop a post.js porque al ser un componente no la tiene, asi dsp me puede redirigir a la screen ComentarPosteo
+                    />
+                    
+              } // en este atributo(renderItem) renderizamos cada cosa que me pide la consigna, los datos los saco de la const posts donde, entrando a data, entro al objeto literal con todos sus atributos (email, nombre, descripcion)
             />
         </View >
     )
@@ -54,3 +52,5 @@ const styles = StyleSheet.create({
 })
 
 export default Home;
+
+

@@ -12,6 +12,11 @@ function NuevoPost() {
             likes: [],
             createdAt: Date.now(),
         })
+            .then(doc => {
+                doc.update({
+                    id: doc.id
+                }); //creo el post con .add(), firebase le genera un id automatico y con doc.update() guardo ese mismo ID dentro del documento como propiedad id --> necesito guardar id para los comments
+            })
             .then(() => {
                 console.log('Post Creado');
                 setDescription('');

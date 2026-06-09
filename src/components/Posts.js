@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import firebase from 'firebase';
 import { db, auth } from '../firebase/config';
-import { View, Text, Pressable} from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 
 
 function Posts(props) {
@@ -46,7 +46,7 @@ function Posts(props) {
             <Text>Email: {props.data.email}</Text>
             <Text>Description: {props.data.description}</Text>
 
-           {/*
+            {/*
                 <Image
                     source={}
                     style={{
@@ -56,7 +56,7 @@ function Posts(props) {
                 /> */}
 
             <Text>Likes: {props.data.likes.length}</Text>
-            
+
 
 
             {usuarioLike
@@ -72,6 +72,13 @@ function Posts(props) {
                     <Text>Like</Text>
                 </Pressable>
             }
+
+            {props.navigation ? //utilizo un if ternario porque en mi perfil no tienen que aparecer "comment", por lo tanto, en miPerfil.js no se pasa la prop navigation(atributo en realidad)
+                <Pressable onPress={() => props.navigation.navigate('ComentarPosteo', { id: props.id })}>
+                    <Text>Comment</Text>
+                </Pressable>
+                :
+                null}
         </View>
     )
 }
