@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { db, auth } from '../firebase/config';
+import { FontAwesome } from '@expo/vector-icons';
 
 function NuevoPost() {
     const [description, setDescription] = useState('');
@@ -26,20 +27,20 @@ function NuevoPost() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.logo}>Pawly</Text>
+            <Text style={styles.logo}>Pawly  <FontAwesome name="paw" size={30} color="#F28C28" /></Text>
             <Text style={styles.titulo}>New Post</Text>
 
-            <View  style={styles.card}>
+            <View style={styles.card}>
                 <TextInput
-                style={styles.input}
-                placeholder='Post:'
-                value={description}
-                onChangeText={text => setDescription(text)}
-            />
+                    style={styles.input}
+                    placeholder='Post:'
+                    value={description}
+                    onChangeText={text => setDescription(text)}
+                />
 
-            <Pressable style={styles.boton} onPress={onSubmit}>
-                <Text>Publicar Post</Text>
-            </Pressable>
+                <Pressable style={styles.boton} onPress={onSubmit}>
+                    <Text style={styles.textoBoton} >Publicar Post</Text>
+                </Pressable>
             </View>
         </View>
     )
@@ -73,9 +74,8 @@ const styles = StyleSheet.create({
         borderColor: '#E8DED5'
     },
     input: {
-        minHeight: 120,
+        backgroundColor: '#fff',
         borderWidth: 1,
-        borderColor: '#E0D6CC',
         borderRadius: 10,
         padding: 12,
         textAlignVertical: 'top',
@@ -83,15 +83,21 @@ const styles = StyleSheet.create({
         marginBottom: 15
     },
     boton: {
-        backgroundColor: '#F28C28',
-        paddingVertical: 13,
+        backgroundColor: '#F6A85A',
+        paddingVertical: 12,
+        paddingHorizontal: 16,
+        borderRadius: 10,
+        flexDirection: 'row',
         alignItems: 'center',
-        borderRadius: 10
+        justifyContent: 'center',
+        marginTop: 10,
+        shadowRadius: 6,
     },
     textoBoton: {
         color: '#fff',
         fontWeight: 'bold',
-        fontSize: 16
+        fontSize: 16,
+        fontWeight: 'bold',
     }
 });
 
