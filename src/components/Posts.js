@@ -47,15 +47,6 @@ function Posts(props) {
             <Text style={styles.email}>{props.data.email}</Text>
             <Text style={styles.descripcion}>{props.data.description}</Text>
 
-            {/*
-                <Image
-                    source={}
-                    style={{
-                        width: 150,
-                        height: 150
-                    }}
-                /> */}
-
             <View style={styles.likesContainer}>
 
                 <Text style={styles.likes}> <FontAwesome
