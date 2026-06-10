@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { View, Text, Pressable, StyleSheet, TextInput } from 'react-native';
 import { auth } from '../firebase/config'; // auth dejará disponibles métodos asincrónicos para registrar y loguear un usuario. Ambos requieren de los parámetros email y pass
+import { FontAwesome } from '@expo/vector-icons';
 
 
 function Login(props) {
@@ -39,7 +40,7 @@ function Login(props) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.logo}>Pawly</Text>
+            <Text style={styles.logo} >Pawly <FontAwesome name="paw" size={30} color="#F28C28" /></Text>
             <Text style={styles.titulo}>Formulario de login</Text>
 
             <TextInput 
@@ -72,7 +73,7 @@ function Login(props) {
                 onPress={() => props.navigation.navigate('Register')} // chequear que register lo llamen asi
                 style={styles.linkContainer}
             >
-                <Text style={styles.textoBoton}>Ir al registro</Text>
+                <Text style={styles.link}>¿No tenes cuenta? Ir al registro</Text>
             </Pressable>
 
         </View>
@@ -134,7 +135,7 @@ const styles = StyleSheet.create({
     link: {
         color: '#2F80ED',
         textAlign: 'center',
-        fontWeight: 'bold'
+        textDecorationLine: 'underline'
     }
 });
 

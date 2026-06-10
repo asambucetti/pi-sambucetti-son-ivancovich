@@ -43,7 +43,7 @@ function MiPerfil(props) {
     return (
         <View style={styles.container}>
             <Text style={styles.logo}>Pawly <FontAwesome name="paw" size={30} color="#F28C28" /></Text>
-            
+
 
             <View style={styles.cardPerfil}>
                 <Image
@@ -51,24 +51,27 @@ function MiPerfil(props) {
                     style={styles.foto}
                 />
                 <View>
-                <Text style={styles.nombre}>{usuario.username} <FontAwesome name="paw" size={20} color="#F28C28" />
-                </Text>
-                <Text style={styles.email}><FontAwesome name="envelope" size={18} color="#F28C28" /> {auth.currentUser.email}</Text>
+                    <Text style={styles.nombre}>{usuario.username} <FontAwesome name="paw" size={20} color="#F28C28" />
+                    </Text>
+                    <Text style={styles.email}><FontAwesome name="envelope" size={18} color="#F28C28" /> {auth.currentUser.email}</Text>
                 </View>
             </View>
 
             <Text style={styles.subtitulo}>
-                  Mis posteos
+                Mis posteos
             </Text>
+            <View style={styles.listaContainer}>
+                {
+                    posts.length > 0 ? (<FlatList
+                        style={styles.listaPosts}
+                        data={posts}
+                        keyExtractor={(item) => item.id}
+                        renderItem={({ item }) => (
+                            <Post id={item.id} data={item.data} />
+                        )} />) : (<Text style={styles.noPosts}>No tenés posteos</Text>)
+                }
+            </View>
 
-            {
-                posts.length > 0 ? (<FlatList
-                    data={posts}
-                    keyExtractor={(item) => item.id}
-                    renderItem={({ item }) => (
-                        <Post id={item.id} data={item.data} />
-                    )} />) : (<Text style={styles.noPosts}>No tenés posteos</Text>)
-            }
 
 
 
@@ -85,7 +88,15 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#FFF7EF',
         paddingHorizontal: 20,
-        paddingTop: 20
+        paddingTop: 20,
+        paddingBottom: 8
+    },
+    listaContainer: {
+        flex: 1,
+        marginBottom: 8
+    },
+    listaPosts: {
+        flex: 1
     },
     logo: {
         fontSize: 38,
@@ -103,7 +114,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         flexDirection: 'row',
         borderColor: '#E8DED5',
-        marginBottom: 25
     },
     foto: {
         width: 100,
@@ -128,7 +138,8 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontWeight: 'bold',
         color: '#333',
-        marginBottom: 15
+        marginBottom: 15,
+        paddingTop: 20
     },
     noPosts: {
         color: '#999',
@@ -146,6 +157,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginTop: 10,
         shadowRadius: 6,
+        marginBottom: '20'
     },
     textoLogout: {
         color: '#fff',
