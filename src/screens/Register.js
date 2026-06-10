@@ -11,23 +11,25 @@ function Register(props) {
 
     function onSubmit() {
         console.log(username);
-        
+
         if (username === '') {
-        setRegisterError('El nombre de usuario es obligatorio');
-        return;
-    }
+            setRegisterError('El nombre de usuario es obligatorio');
+            return;
+        }
         auth.createUserWithEmailAndPassword(email, pass)
             .then(response => {
-                db.collection('users').add({
+                return db.collection('users').add({
                     email: email,
                     username: username,
                     createdAt: Date.now()
                 })
             })
-            .then((res) => {
-                props.navigation.navigate('Login');
+            .then(() => {
+                return auth.signOut()
             })
-
+            .then(() => {
+                    props.navigation.navigate('Login');
+            })
             .catch(error => {
                 setRegisterError(error.message)
             });
@@ -60,13 +62,13 @@ function Register(props) {
                 onChangeText={text => setPass(text)}
                 value={pass} />
 
-            <Pressable onPress={() => onSubmit()} style={styles.boton}> 
+            <Pressable onPress={() => onSubmit()} style={styles.boton}>
                 <Text style={styles.textoBoton}>Registrarme</Text>
             </Pressable>
 
             {registerError !== '' ? <Text style={styles.error}>{registerError}</Text> : null}
 
-            <Pressable 
+            <Pressable
                 onPress={() => props.navigation.navigate('Login')}
                 style={styles.linkContainer}>
                 <Text style={styles.link}>Ya tengo cuenta</Text>

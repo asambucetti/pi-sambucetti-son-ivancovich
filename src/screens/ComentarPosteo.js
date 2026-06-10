@@ -9,9 +9,8 @@ function ComentarPosteo(props) {
     const [comments, setComments] = useState([]);
     const [loading, setLoading] = useState(true);
     const [comment, setComment] = useState('');
+    const [error, setError] = useState('');
 
-
-    console.log(props); //sacar esto dsp. SOLO ME FUNCIONA PONIENOD PROPS.ROUTE.PARAMS.ID
 
 
     useEffect(() => {
@@ -43,6 +42,10 @@ function ComentarPosteo(props) {
     }, []);
 
     function onSubmit() {
+        if (comment === '') {
+            setError('Debes escribir un comentario');
+            return;
+        }
         db.collection('comments').add({
             owner: auth.currentUser.email,
             postId: props.route.params.id,
@@ -51,6 +54,7 @@ function ComentarPosteo(props) {
         })
             .then(() => {
                 setComment('') //cuestion de estetica, utilizo esto para qwue despues de escribir el comentario y apretar el boton "comment" desaparezca lo que escribi
+                setError('');
             })
             .catch(error => console.log(error))
     };
@@ -60,43 +64,45 @@ function ComentarPosteo(props) {
         <View style={styles.container}>
             <Text style={styles.logo}>Pawly <FontAwesome name="paw" size={30} color="#F28C28" /></Text>
 
-            <FlatList
-                data={posts} // esto esta llamando a la const de arriba y esta linkeado a la screen de posts asi muestra todos y es scrolleable
-                keyExtractor={item => item.id.toString()}
-                renderItem={({ item }) =>// todo lo que vaya despues del data va a depender como lo defina mi compañera en crearPosts/posts
-                    <View style={styles.card}>
-                        <Text style={styles.email}>{item.data.email}</Text>
-                        <Text style={styles.descripcion}>{item.data.description}</Text>
-                        <Text style={styles.likesContainer}>Likes: {item.data.likes.length}</Text>
+            {loading ? <Text>Cargando...</Text>
+                : <FlatList
+                    data={posts} // esto esta llamando a la const de arriba y esta linkeado a la screen de posts asi muestra todos y es scrolleable
+                    keyExtractor={item => item.id.toString()}
+                    renderItem={({ item }) =>// todo lo que vaya despues del data va a depender como lo defina mi compañera en crearPosts/posts
+                        <View style={styles.card}>
+                            <Text style={styles.email}>{item.data.email}</Text>
+                            <Text style={styles.descripcion}>{item.data.description}</Text>
+                            <Text style={styles.likesContainer}>Likes: {item.data.likes.length}</Text>
 
-                        <TextInput
-                            style={styles.input}
-                            keyboardType='default'
-                            placeholder='comment'
-                            onChangeText={text => setComment(text)}
-                            value={comment}
-                        />
+                            <TextInput
+                                style={styles.input}
+                                keyboardType='default'
+                                placeholder='comment'
+                                onChangeText={text => setComment(text)}
+                                value={comment}
+                            />
+                            {error !== '' ? <Text style={styles.error}>{error}</Text> : null}
 
-                        <Pressable onPress={() => onSubmit()} style={styles.boton}>
-                            <Text style={styles.textoBoton}>Comment <FontAwesome name="comment" size={15} color="#fff" /></Text>
-                        </Pressable>
+                            <Pressable onPress={() => onSubmit()} style={styles.boton}>
+                                <Text style={styles.textoBoton}>Comment <FontAwesome name="comment" size={15} color="#fff" /></Text>
+                            </Pressable>
 
-                        <Text style={styles.subtitulo}>Comentarios:</Text>
+                            <Text style={styles.subtitulo}>Comentarios:</Text>
 
-                        <FlatList
-                            style={styles.listaComentarios}
-                            data={comments}
-                            keyExtractor={item => item.id.toString()}
-                            renderItem={({ item }) =>
-                                <View style={styles.commentCard}>
-                                    <Text style={styles.commentOwner}>{item.data.owner} <FontAwesome name="user-circle" size={15} color="#F28C28" /> </Text>
-                                    <Text style={styles.commentText}>{item.data.commentPost}</Text>
-                                </View>
-                            }
-                        />
+                            <FlatList
+                                style={styles.listaComentarios}
+                                data={comments}
+                                keyExtractor={item => item.id.toString()}
+                                renderItem={({ item }) =>
+                                    <View style={styles.commentCard}>
+                                        <Text style={styles.commentOwner}>{item.data.owner} <FontAwesome name="user-circle" size={15} color="#F28C28" /> </Text>
+                                        <Text style={styles.commentText}>{item.data.commentPost}</Text>
+                                    </View>
+                                }
+                            />
 
-                    </View>}
-            />
+                        </View>}
+                />}
         </View >
     )
 };
@@ -214,6 +220,12 @@ const styles = StyleSheet.create({
         color: '#444',
         fontSize: 15
     },
+
+    error: {
+        color: 'red',
+        textAlign: 'center',
+        marginBottom: 10
+    }
 });
 
 export default ComentarPosteo;
