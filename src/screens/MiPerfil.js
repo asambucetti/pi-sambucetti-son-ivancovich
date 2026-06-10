@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginTop: 10,
         shadowRadius: 6,
-        marginBottom: '20'
+        marginBottom: 20
     },
     textoLogout: {
         color: '#fff',

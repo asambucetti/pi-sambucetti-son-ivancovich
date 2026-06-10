@@ -81,7 +81,7 @@ function Posts(props) {
             </View>
 
             {
-                props.navigation ? //utilizo un if ternario porque en mi perfil no tienen que aparecer "comment", por lo tanto, en miPerfil.js no se pasa la prop navigation(atributo en realidad)
+                props.navigation ? //utilizo un if ternario porque en mi perfil no tienen que aparecer "comment"
                     <Pressable onPress={() => props.navigation.navigate('ComentarPosteo', { id: props.id })} style={styles.botonComentar}>
                         <Text style={styles.textoBoton}>Comment</Text>
                     </Pressable>

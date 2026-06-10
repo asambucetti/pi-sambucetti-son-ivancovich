@@ -76,8 +76,8 @@ function ComentarPosteo(props) {
                             value={comment}
                         />
 
-                        <Pressable onPress={() => onSubmit()}>
-                            <Text style={StyleSheet.textoBoton}>Comment</Text>
+                        <Pressable onPress={() => onSubmit()} style={styles.boton}>
+                            <Text style={styles.textoBoton}>Comment</Text>
                         </Pressable>
 
                         <Text style={styles.subtitulo}>Comentarios:</Text>

@@ -33,7 +33,7 @@ function Login(props) {
                 props.navigation.navigate('NavegacionTab', { screen: 'NavegacionStackHome' });
             })
             .catch(error => {
-                setLoginError('Email o contraseña incorrectos')
+                setLoginError('Credenciales incorrectas')
                 console.log(error)
             });
     };
@@ -70,7 +70,7 @@ function Login(props) {
             {loginError !== '' ? <Text style={styles.error}>{loginError}</Text> : null}
 
             <Pressable
-                onPress={() => props.navigation.navigate('Register')} // chequear que register lo llamen asi
+                onPress={() => props.navigation.navigate('Register')} 
                 style={styles.linkContainer}
             >
                 <Text style={styles.link}>¿No tenes cuenta? Ir al registro</Text>

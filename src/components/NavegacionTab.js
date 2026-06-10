@@ -8,7 +8,7 @@ const Tab = createBottomTabNavigator();
 
 function NavegacionTab() {
     return (
-        <Tab.Navigator>
+        <Tab.Navigator  screenOptions={{ headerShown: false }}>
             <Tab.Screen 
             name="Home" 
             component={NavegacionStackHome} 

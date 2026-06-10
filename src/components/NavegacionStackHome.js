@@ -6,9 +6,9 @@ import ComentarPosteo from '../screens/ComentarPosteo'
 const Stack = createNativeStackNavigator();
 function NavegacionStack(){
     return(
-        <Stack.Navigator>
+    <Stack.Navigator>
         <Stack.Screen name="Home" component={ Home } />
-        <Stack.Screen name="ComentarPosteo" component={ ComentarPosteo } />
+        <Stack.Screen name="ComentarPosteo" component={ ComentarPosteo }/>
      </Stack.Navigator>
     )
 }
