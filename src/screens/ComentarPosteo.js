@@ -59,14 +59,15 @@ function ComentarPosteo(props) {
     return (
         <View style={styles.container}>
             <Text style={styles.logo}>Pawly <FontAwesome name="paw" size={30} color="#F28C28" /></Text>
+
             <FlatList
                 data={posts} // esto esta llamando a la const de arriba y esta linkeado a la screen de posts asi muestra todos y es scrolleable
                 keyExtractor={item => item.id.toString()}
                 renderItem={({ item }) =>// todo lo que vaya despues del data va a depender como lo defina mi compañera en crearPosts/posts
-                    <View>
+                    <View style={styles.card}>
                         <Text style={styles.email}>{item.data.email}</Text>
                         <Text style={styles.descripcion}>{item.data.description}</Text>
-                        <Text style={styles.likes}>Likes: {item.data.likes.length}</Text>
+                        <Text style={styles.likesContainer}>Likes: {item.data.likes.length}</Text>
 
                         <TextInput
                             style={styles.input}
@@ -76,18 +77,19 @@ function ComentarPosteo(props) {
                             value={comment}
                         />
 
-                        <Pressable onPress={() => onSubmit()}>
-                            <Text style={StyleSheet.textoBoton}>Comment</Text>
+                        <Pressable onPress={() => onSubmit()} style={styles.boton}>
+                            <Text style={styles.textoBoton}>Comment <FontAwesome name="comment" size={15} color="#fff" /></Text>
                         </Pressable>
 
                         <Text style={styles.subtitulo}>Comentarios:</Text>
 
                         <FlatList
+                            style={styles.listaComentarios}
                             data={comments}
                             keyExtractor={item => item.id.toString()}
                             renderItem={({ item }) =>
                                 <View style={styles.commentCard}>
-                                    <Text style={styles.commentOwner}>{item.data.owner}</Text>
+                                    <Text style={styles.commentOwner}>{item.data.owner} <FontAwesome name="user-circle" size={15} color="#F28C28" /> </Text>
                                     <Text style={styles.commentText}>{item.data.commentPost}</Text>
                                 </View>
                             }
@@ -104,86 +106,114 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#FFF7EF',
-        paddingHorizontal: 15,
-        paddingTop: 20
+        paddingHorizontal: 20,
+        paddingTop: 20,
+        paddingBottom: 8
     },
+
     logo: {
-        fontSize: 34,
+        fontSize: 38,
         fontWeight: 'bold',
         color: '#F28C28',
         textAlign: 'center',
-        marginBottom: 5
+        marginBottom: 8
     },
-    titulo: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: '#333',
-        marginBottom: 15
-    },
+
     card: {
         backgroundColor: '#fff',
-        padding: 15,
-        borderRadius: 14,
+        padding: 18,
+        borderRadius: 18,
         borderWidth: 1,
         borderColor: '#E8DED5',
         marginBottom: 15
     },
+
     email: {
         fontWeight: 'bold',
         color: '#333',
         fontSize: 15,
-        marginBottom: 8
+        marginBottom: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: '#E8DED5',
+        paddingBottom: 8
     },
+
     descripcion: {
         color: '#444',
-        fontSize: 16,
+        fontSize: 17,
         marginBottom: 12
     },
+
+    likesContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 18
+    },
+
     likes: {
         color: '#777',
-        marginBottom: 15
+        fontSize: 15
     },
+
     input: {
         backgroundColor: '#fff',
         borderWidth: 1,
         borderColor: '#E0D6CC',
         borderRadius: 10,
-        padding: 12,
-        marginBottom: 12
-    },
-    boton: {
-        backgroundColor: '#2F80ED',
         paddingVertical: 12,
-        alignItems: 'center',
-        borderRadius: 10,
-        marginBottom: 20
+        paddingHorizontal: 12,
+        marginBottom: 12,
+        fontSize: 15
     },
+
+    boton: {
+        backgroundColor: '#F28C28',
+        paddingVertical: 12,
+        paddingHorizontal: 16,
+        borderRadius: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 20,
+        shadowRadius: 6
+    },
+
     textoBoton: {
         color: '#fff',
         fontWeight: 'bold',
-        fontSize: 15,
+        fontSize: 16
     },
+
     subtitulo: {
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: 'bold',
         color: '#333',
-        marginBottom: 10
+        marginBottom: 12
     },
+
+    listaComentarios: {
+        marginBottom: 5
+    },
+
     commentCard: {
         backgroundColor: '#FFF7EF',
-        padding: 10,
-        borderRadius: 10,
+        padding: 12,
+        borderRadius: 12,
         marginBottom: 10,
         borderWidth: 1,
         borderColor: '#E8DED5'
     },
+
     commentOwner: {
         fontWeight: 'bold',
         color: '#333',
-        marginBottom: 4
+        fontSize: 14,
+        marginBottom: 6
     },
+
     commentText: {
-        color: '#444'
-    }
+        color: '#444',
+        fontSize: 15
+    },
 });
+
 export default ComentarPosteo;
