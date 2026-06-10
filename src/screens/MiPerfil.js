@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
-import { View, Text, Pressable, StyleSheet, FlatList } from 'react-native';
+import { View, Text, Pressable, StyleSheet, FlatList, Image } from 'react-native';
 import { auth, db } from '../firebase/config';
 import Post from '../components/Posts';
+import { FontAwesome } from '@expo/vector-icons';
+
 
 function MiPerfil(props) {
 
@@ -29,69 +31,131 @@ function MiPerfil(props) {
                         data: doc.data()
                     });
                 });
-                 setPosts(posts)
+                setPosts(posts)
             })
     }, []);
 
     function Logout() {
-    auth.signOut()
-    props.navigation.navigate('Login');
-}
+        auth.signOut()
+        props.navigation.navigate('Login');
+    }
 
-return (
-    <View style={styles.container}>
-        <Text style={styles.titulo}>
-            Mi Perfil
-        </Text>
+    return (
+        <View style={styles.container}>
+            <Text style={styles.logo}>Pawly <FontAwesome name="paw" size={30} color="#F28C28" /></Text>
+            
 
-        <Text>
-            Usuario: {usuario.username}
-        </Text>
+            <View style={styles.cardPerfil}>
+                <Image
+                    source={require('../../assets/perro.jpeg')}
+                    style={styles.foto}
+                />
+                <View>
+                <Text style={styles.nombre}>{usuario.username} <FontAwesome name="paw" size={20} color="#F28C28" />
+                </Text>
+                <Text style={styles.email}><FontAwesome name="envelope" size={18} color="#F28C28" /> {auth.currentUser.email}</Text>
+                </View>
+            </View>
 
-        <Text>
-            Email: {auth.currentUser.email}
-        </Text>
+            <Text style={styles.subtitulo}>
+                  Mis posteos
+            </Text>
 
-        <Text>
-            Mis posteos
-        </Text>
-
-        {
-            posts.length > 0 ? (<FlatList
-                data={posts}
-                keyExtractor={(item) => item.id}
-                renderItem={({ item }) => (
-                    <Post  id={item.id} data={item.data}/>
-                )} />) : (<Text>No tenés posteos</Text>)
-        }
+            {
+                posts.length > 0 ? (<FlatList
+                    data={posts}
+                    keyExtractor={(item) => item.id}
+                    renderItem={({ item }) => (
+                        <Post id={item.id} data={item.data} />
+                    )} />) : (<Text style={styles.noPosts}>No tenés posteos</Text>)
+            }
 
 
 
 
-        <Pressable style={styles.boton} onPress={() => Logout()}>
-            <Text>Desloguearse</Text>
-        </Pressable>
-    </View>
-)
+            <Pressable style={styles.botonLogout} onPress={() => Logout()}>
+                <Text style={styles.textoLogout}>Desloguearse</Text>
+            </Pressable>
+        </View>
+    )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#ffffff',
+        backgroundColor: '#FFF7EF',
+        paddingHorizontal: 20,
+        paddingTop: 20
+    },
+    logo: {
+        fontSize: 38,
+        fontWeight: 'bold',
+        color: '#F28C28',
+        textAlign: 'center',
+        marginBottom: 25
+    },
+    cardPerfil: {
+        backgroundColor: '#fff',
+        padding: 25,
+        borderRadius: 20,
+        shadowRadius: 10,
+        alignItems: 'center',
+        borderWidth: 1,
+        flexDirection: 'row',
+        borderColor: '#E8DED5',
+        marginBottom: 25
+    },
+    foto: {
+        width: 100,
+        height: 100,
+        borderRadius: 50,
+        borderWidth: 2,
+        borderColor: '#F28C28',
+        marginRight: 15
+    },
+    nombre: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: '#333',
+        marginBottom: 12
+    },
+
+    email: {
+        fontSize: 15,
+        color: '#777'
+    },
+    subtitulo: {
+        fontSize: 22,
+        fontWeight: 'bold',
+        color: '#333',
+        marginBottom: 15
+    },
+    noPosts: {
+        color: '#999',
+        textAlign: 'center',
+        marginTop: 30,
+        fontSize: 15
+    },
+    botonLogout: {
+        backgroundColor: '#F6A85A',
+        paddingVertical: 12,
+        paddingHorizontal: 16,
+        borderRadius: 10,
+        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
+        marginTop: 10,
+        shadowRadius: 6,
     },
-
-    titulo: {
-        fontSize: 20,
-        marginBottom: 15,
-    },
-
-    boton: {
-        backgroundColor: '#fda84d',
-        borderRadius: 10,
-    },
+    textoLogout: {
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 16,
+        fontWeight: 'bold',
+    }
 });
 
+
 export default MiPerfil;
+
+

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { View, Text, Pressable, StyleSheet, TextInput, FlatList } from 'react-native';
 import { db, auth } from '../firebase/config';
+import { FontAwesome } from '@expo/vector-icons';
 
 function ComentarPosteo(props) {
 
@@ -57,7 +58,7 @@ function ComentarPosteo(props) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.logo}>Pawly</Text>
+            <Text style={styles.logo}>Pawly <FontAwesome name="paw" size={30} color="#F28C28" /></Text>
             <FlatList
                 data={posts} // esto esta llamando a la const de arriba y esta linkeado a la screen de posts asi muestra todos y es scrolleable
                 keyExtractor={item => item.id.toString()}

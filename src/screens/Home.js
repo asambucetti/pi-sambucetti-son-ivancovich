@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { db } from '../firebase/config';
 import Posts from '../components/Posts';
+import { FontAwesome } from '@expo/vector-icons';
 
 function Home(props) {
     const [posts, setPosts] = useState([]);
@@ -27,7 +28,7 @@ function Home(props) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.logo}>Pawly</Text>
+            <Text style={styles.logo}>Pawly <FontAwesome name="paw" size={30} color="#F28C28" /></Text>
             {(loading) ?
                 (<View style={styles.container} >
                     <Text>Cargando...</Text>
