@@ -37,7 +37,10 @@ function MiPerfil(props) {
 
     function Logout() {
         auth.signOut()
-        props.navigation.navigate('Login');
+            .then(() => {
+                props.navigation.navigate('Login');
+            })
+            .catch(error => console.log(error));
     }
 
     return (

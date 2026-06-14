@@ -5,8 +5,13 @@ import { FontAwesome } from '@expo/vector-icons';
 
 function NuevoPost() {
     const [description, setDescription] = useState('');
+    const [error, setError] = useState('');
 
     function onSubmit() {
+        if (description === '') {
+            setError('Debes escribir una descripción');
+            return;
+        }
         db.collection('posts').add({
             email: auth.currentUser.email,
             description: description,
@@ -21,8 +26,10 @@ function NuevoPost() {
             .then(() => {
                 console.log('Post Creado');
                 setDescription('');
+                setError('');
             })
             .catch(e => console.log(e))
+
     }
 
     return (
@@ -37,6 +44,7 @@ function NuevoPost() {
                     value={description}
                     onChangeText={text => setDescription(text)}
                 />
+                {error !== '' ? <Text style={styles.error}>{error}</Text> : null}
 
                 <Pressable style={styles.boton} onPress={onSubmit}>
                     <Text style={styles.textoBoton} >Publicar Post</Text>
@@ -98,6 +106,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 16,
         fontWeight: 'bold',
+    },
+    error: {
+        color: 'red',
+        textAlign: 'center',
+        marginBottom: 10
     }
 });
 

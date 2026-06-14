@@ -10,8 +10,6 @@ function Register(props) {
     const [registerError, setRegisterError] = useState('');
 
     function onSubmit() {
-        console.log(username);
-
         if (username === '') {
             setRegisterError('El nombre de usuario es obligatorio');
             return;
@@ -25,7 +23,7 @@ function Register(props) {
                 })
             })
             .then(() => {
-                return auth.signOut()
+                return auth.signOut();
             })
             .then(() => {
                     props.navigation.navigate('Login');

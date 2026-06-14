@@ -30,7 +30,7 @@ function Login(props) {
         }
         auth.signInWithEmailAndPassword(email, password)
             .then(response => {
-                props.navigation.navigate('NavegacionTab', { screen: 'NavegacionStackHome' });
+                props.navigation.navigate('NavegacionTab');
             })
             .catch(error => {
                 setLoginError('Credenciales incorrectas')
