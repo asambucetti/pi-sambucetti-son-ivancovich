@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { auth, db } from '../firebase/config';
 import { FontAwesome } from '@expo/vector-icons';

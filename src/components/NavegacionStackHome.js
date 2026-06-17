@@ -4,7 +4,7 @@ import ComentarPosteo from '../screens/ComentarPosteo'
 
 
 const Stack = createNativeStackNavigator();
-function NavegacionStack(){
+function NavegacionStackHome(){
     return(
     <Stack.Navigator>
         <Stack.Screen name="Home" component={ Home } />
@@ -12,6 +12,6 @@ function NavegacionStack(){
      </Stack.Navigator>
     )
 }
-export default NavegacionStack;
+export default NavegacionStackHome;
 
 
