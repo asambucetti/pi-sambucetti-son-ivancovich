@@ -45,7 +45,7 @@ function Home(props) {
                                 navigation={props.navigation} //le paso la prop a post.js porque al ser un componente no la tiene, asi dsp me puede redirigir a la screen ComentarPosteo
                             />
 
-                        } // en este atributo(renderItem) renderizamos cada cosa que me pide la consigna, los datos los saco de la const posts donde, entrando a data, entro al objeto literal con todos sus atributos (email, nombre, descripcion)
+                        } 
                     />
                 </View >)}
         </View>

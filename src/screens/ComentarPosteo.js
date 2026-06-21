@@ -66,9 +66,9 @@ function ComentarPosteo(props) {
 
             {loading ? <Text>Cargando...</Text>
                 : <FlatList
-                    data={posts} // esto esta llamando a la const de arriba y esta linkeado a la screen de posts asi muestra todos y es scrolleable
+                    data={posts} // esto esta llamando a la const de arriba 
                     keyExtractor={item => item.id.toString()}
-                    renderItem={({ item }) =>// todo lo que vaya despues del data va a depender como lo defina mi compañera en crearPosts/posts
+                    renderItem={({ item }) =>
                         <View style={styles.card}>
                             <Text style={styles.email}>{item.data.email}</Text>
                             <Text style={styles.descripcion}>{item.data.description}</Text>
