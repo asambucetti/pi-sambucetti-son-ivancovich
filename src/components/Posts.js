@@ -56,7 +56,7 @@ function Posts(props) {
                 />  {props.data.likes.length} Likes</Text>
 
                 <Pressable
-                    onPress={usuarioLike ? dislike : like}
+                    onPress={() => usuarioLike ? dislike() : like()} 
                     style={styles.botonLike}
                 >
                     <FontAwesome

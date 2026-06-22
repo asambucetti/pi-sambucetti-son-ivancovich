@@ -36,7 +36,7 @@ function Home(props) {
                 :
                 (<View style={styles.container}>
                     <FlatList
-                        data={posts} // esto esta llamando a la const de arriba y esta linkeado a la screen de posts asi muestra todos y es scrolleable
+                        data={posts} // esto esta llamando a la const de arriba
                         keyExtractor={item => item.id.toString()}
                         renderItem={({ item }) =>
                             <Posts
